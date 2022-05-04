@@ -4,7 +4,7 @@ import '../App.css'
 
 function Home() {
     // State
-    const [buyInCost, setBuyInCost, chipsPerBuyIn, setChipsPerBuyIn] = useOutletContext()
+    const [buyInCost, setBuyInCost, chipsPerBuyIn, setChipsPerBuyIn, , ,] = useOutletContext()
     // Handler Functions
     const navigate = useNavigate()
     const handleSubmit = (e) => {

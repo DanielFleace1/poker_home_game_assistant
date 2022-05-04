@@ -5,9 +5,19 @@ import '../App.css'
 function App() {
     const [buyInCost, setBuyInCost] = useState(Number)
     const [chipsPerBuyIn, setChipsPerBuyIn] = useState(Number)
+    const [playersArray, setPlayersArray] = useState([])
     return (
         <div>
-            <Outlet context={[buyInCost, setBuyInCost, chipsPerBuyIn, setChipsPerBuyIn]} />
+            <Outlet
+                context={[
+                    buyInCost,
+                    setBuyInCost,
+                    chipsPerBuyIn,
+                    setChipsPerBuyIn,
+                    playersArray,
+                    setPlayersArray,
+                ]}
+            />
         </div>
     )
 }

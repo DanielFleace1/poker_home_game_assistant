@@ -24,8 +24,8 @@ function Game() {
             endingChips: 0,
             index: indexNum,
         }
-        setIndexNum(indexNum + 1)
         setPlayersArray([...playersArray, obj])
+        setIndexNum(indexNum + 1)
         setNewPlayer('')
     }
     const handleSetNewPlayer = (e) => {
