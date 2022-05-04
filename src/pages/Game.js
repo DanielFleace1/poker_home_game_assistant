@@ -99,23 +99,24 @@ function Game() {
                 <div>player Name </div> <div> ::Buy ins</div>
             </div>
             <form onSubmit={handleCalculatePayouts}>
-                {playersArray.map((player) => {
-                    return (
-                        <div key={player.index}>
-                            {player.name}{' '}
-                            <input
-                                onChange={handleBuyInChange}
-                                name={player.index}
-                                value={player.buyIns}
-                            />{' '}
-                            <input
-                                onChange={handleEndChipCountChange}
-                                name={player.index}
-                                value={player.endingChips}
-                            />
-                        </div>
-                    )
-                })}
+                {playersArray &&
+                    playersArray.map((player) => {
+                        return (
+                            <div key={player.index}>
+                                {player.name}{' '}
+                                <input
+                                    onChange={handleBuyInChange}
+                                    name={player.index}
+                                    value={player.buyIns}
+                                />{' '}
+                                <input
+                                    onChange={handleEndChipCountChange}
+                                    name={player.index}
+                                    value={player.endingChips}
+                                />
+                            </div>
+                        )
+                    })}
                 <br />
                 <button type="submit">calculate payouts</button>
             </form>
