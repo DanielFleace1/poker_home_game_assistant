@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 import App from './pages/App'
 import Home from './pages/Home'
-import NotFound from './pages/NotFound'
+// import NotFound from './pages/NotFound'
 import Game from './pages/Game'
 import './index.css'
 
@@ -16,7 +16,8 @@ root.render(
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
                     <Route path="/Game" element={<Game />} />
-                    <Route path="*" element={<NotFound />} />
+                    <Route path="*" element={<Home />} />
+                    {/* <Route path="*" element={<NotFound />} /> */}
                 </Route>
             </Routes>
         </BrowserRouter>
