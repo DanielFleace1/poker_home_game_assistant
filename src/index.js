@@ -17,7 +17,6 @@ root.render(
                     <Route index element={<Home />} />
                     <Route path="/Game" element={<Game />} />
                     <Route path="*" element={<Home />} />
-                    {/* <Route path="*" element={<NotFound />} /> */}
                 </Route>
             </Routes>
         </BrowserRouter>
