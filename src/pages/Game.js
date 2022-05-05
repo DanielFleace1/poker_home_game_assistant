@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
+// Material UI
 import Alert from '@mui/material/Alert'
+// Css
 import '../App.css'
+// Helper Fns
 import helperFunctions from '../helperFunctions'
+// Components
+import ExitGameDialog from '../components/ExitGameDialog'
 
 function Game() {
     // State
-    const [buyInCost, , chipsPerBuyIn, , playersArray, setPlayersArray] = useOutletContext()
+    const [
+        buyInCost, // setBuyInCost,
+        ,
+        chipsPerBuyIn, // setChipsPerBuyIn,
+        ,
+        playersArray,
+        setPlayersArray,
+    ] = useOutletContext()
     const [newPlayer, setNewPlayer] = useState('')
     const [alertMsg, setAlertMsg] = useState(null)
     const [alertSeverity, setAlertSeverity] = useState(null)
@@ -14,10 +26,6 @@ function Game() {
     const [payoutDisplay, setPayoutDisplay] = useState(null)
     const navigate = useNavigate()
 
-    // Handlers
-    const handleExit = () => {
-        navigate('/')
-    }
     const addPlayer = (e) => {
         e.preventDefault()
         if (newPlayer.length === 0) return // add display warning: cannot enter players without a name
@@ -138,10 +146,11 @@ function Game() {
                     // eslint-disable-next-line react/no-array-index-key
                     return <div key={index}> {elm} </div>
                 })}
+            <ExitGameDialog />
 
-            <button type="button" onClick={handleExit}>
+            {/* <button type="button" onClick={handleExit}>
                 Exit Game - Home
-            </button>
+            </button> */}
         </div>
     )
 }
