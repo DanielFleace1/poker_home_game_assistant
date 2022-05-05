@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
 import Alert from '@mui/material/Alert'
 import '../App.css'
+import helperFunctions from '../helperFunctions'
 
 function Game() {
     // State
@@ -10,6 +11,7 @@ function Game() {
     const [alertMsg, setAlertMsg] = useState(null)
     const [alertSeverity, setAlertSeverity] = useState(null)
     const [indexNum, setIndexNum] = useState(0)
+    const [payoutDisplay, setPayoutDisplay] = useState(null)
     const navigate = useNavigate()
 
     // Handlers
@@ -18,6 +20,7 @@ function Game() {
     }
     const addPlayer = (e) => {
         e.preventDefault()
+        if (newPlayer.length === 0) return // add display warning: cannot enter players without a name
         const obj = {
             name: newPlayer,
             buyIns: 0,
@@ -33,6 +36,15 @@ function Game() {
     }
     const handleCalculatePayouts = (e) => {
         e.preventDefault()
+        const payout = helperFunctions.calculatePayouts(
+            playersArray,
+            buyInCost,
+            buyInCost / chipsPerBuyIn
+        )
+        setPayoutDisplay(payout)
+        setTimeout(() => {
+            setPayoutDisplay(null)
+        }, 5000)
     }
     const handleBuyInChange = (e) => {
         const { name, value } = e.target
@@ -120,6 +132,13 @@ function Game() {
                 <br />
                 <button type="submit">calculate payouts</button>
             </form>
+
+            {payoutDisplay &&
+                payoutDisplay.map((elm, index) => {
+                    // eslint-disable-next-line react/no-array-index-key
+                    return <div key={index}> {elm} </div>
+                })}
+
             <button type="button" onClick={handleExit}>
                 Exit Game - Home
             </button>
