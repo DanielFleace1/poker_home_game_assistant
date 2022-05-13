@@ -7,7 +7,15 @@ function App() {
     const [chipsPerBuyIn, setChipsPerBuyIn] = useState(Number)
     const [playersArray, setPlayersArray] = useState([])
 
-    // console.log('re render app')
+    const buyInCostStorage = window.sessionStorage.getItem('buyInCost')
+    const chipsPerBuyInStorage = window.sessionStorage.getItem('chipsPerBuyIn')
+
+    if (!buyInCost || !chipsPerBuyIn) {
+        if (buyInCostStorage && chipsPerBuyInStorage) {
+            setBuyInCost(buyInCostStorage)
+            setChipsPerBuyIn(chipsPerBuyInStorage)
+        }
+    }
 
     return (
         <div>

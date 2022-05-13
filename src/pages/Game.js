@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
-// Material UI
 import Alert from '@mui/material/Alert'
-// Css
 import '../App.css'
-// Helper Fns
 import helperFunctions from '../helperFunctions'
-// Components
 import ExitGameDialog from '../components/ExitGameDialog'
 
 function Game() {
-    // State
     const [
         buyInCost, // setBuyInCost,
         ,
@@ -98,6 +93,7 @@ function Game() {
             setRemovePlayer('')
         }
     }
+
     // Effects
     useEffect(() => {
         if (Number(buyInCost) === 0 || Number(chipsPerBuyIn) === 0) {
@@ -165,15 +161,8 @@ function Game() {
                 })}
             <ExitGameDialog />
             <br />
+
             <form onSubmit={handleRemovePlayer}>
-                {/* <input
-                    value={removePlayer}
-                    onChange={(e) => {
-                        setRemovePlayer(e.target.value)
-                    }}
-                    placeholder="Remove Player"
-                /> */}
-                {/* <button type="submit">Remove Player</button> */}
                 <select
                     value={removePlayer}
                     onChange={(e) => {

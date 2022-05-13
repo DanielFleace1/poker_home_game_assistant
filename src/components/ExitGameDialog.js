@@ -24,6 +24,7 @@ function ExitGameDialog() {
         setPlayersArray([])
         setChipsPerBuyIn(0)
         setBuyInCost(0)
+        window.sessionStorage.clear()
         navigate('/')
     }
     const handleOpen = () => {
@@ -51,11 +52,11 @@ function ExitGameDialog() {
                         information.
                     </DialogContentText>
                     <DialogActions>
-                        <button onClick={handleExit} type="button">
-                            End Game
-                        </button>
                         <button onClick={handleClose} type="button">
                             Return to Game
+                        </button>
+                        <button onClick={handleExit} type="button">
+                            End Game
                         </button>
                     </DialogActions>
                 </DialogContent>

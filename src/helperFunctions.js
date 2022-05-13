@@ -12,8 +12,6 @@ const getAry = (deepClone, buyInCost, dollarChip) => {
 }
 
 const calculatePayouts = (playersArray, buyInCost, dollarChip) => {
-    // console.log('calculate payt outs')
-    // create a deep copy of players ary
     const deepClone = JSON.parse(JSON.stringify(playersArray))
     const ary = getAry(deepClone, buyInCost, dollarChip)
     const rA = []
