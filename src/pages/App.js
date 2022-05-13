@@ -6,6 +6,9 @@ function App() {
     const [buyInCost, setBuyInCost] = useState(Number)
     const [chipsPerBuyIn, setChipsPerBuyIn] = useState(Number)
     const [playersArray, setPlayersArray] = useState([])
+
+    // console.log('re render app')
+
     return (
         <div>
             <Outlet

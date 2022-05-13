@@ -20,6 +20,7 @@ function Game() {
         setPlayersArray,
     ] = useOutletContext()
     const [newPlayer, setNewPlayer] = useState('')
+    const [removePlayer, setRemovePlayer] = useState('')
     const [alertMsg, setAlertMsg] = useState(null)
     const [alertSeverity, setAlertSeverity] = useState(null)
     const [indexNum, setIndexNum] = useState(0)
@@ -34,6 +35,10 @@ function Game() {
             buyIns: 0,
             endingChips: 0,
             index: indexNum,
+        }
+        if (playersArray.findIndex((x) => x.name === obj.name) > -1) {
+            //  Display warning
+            return
         }
         setPlayersArray([...playersArray, obj])
         setIndexNum(indexNum + 1)
@@ -78,6 +83,19 @@ function Game() {
                 { ...playersArray[playerIndex], endingChips: value },
                 ...playersArray.slice(playerIndex + 1),
             ])
+        }
+    }
+    const handleRemovePlayer = (e) => {
+        e.preventDefault()
+        const playerIndex = playersArray.findIndex((x) => String(x.index) === removePlayer)
+        if (playerIndex === -1) {
+            // handle error
+        } else {
+            setPlayersArray([
+                ...playersArray.slice(0, playerIndex),
+                ...playersArray.slice(playerIndex + 1),
+            ])
+            setRemovePlayer('')
         }
     }
     // Effects
@@ -140,34 +158,46 @@ function Game() {
                 <br />
                 <button type="submit">calculate payouts</button>
             </form>
-
             {payoutDisplay &&
                 payoutDisplay.map((elm, index) => {
                     // eslint-disable-next-line react/no-array-index-key
                     return <div key={index}> {elm} </div>
                 })}
             <ExitGameDialog />
+            <br />
+            <form onSubmit={handleRemovePlayer}>
+                {/* <input
+                    value={removePlayer}
+                    onChange={(e) => {
+                        setRemovePlayer(e.target.value)
+                    }}
+                    placeholder="Remove Player"
+                /> */}
+                {/* <button type="submit">Remove Player</button> */}
+                <select
+                    value={removePlayer}
+                    onChange={(e) => {
+                        setRemovePlayer(e.target.value)
+                    }}
+                    name="players"
+                >
+                    <option selected="selected" value="">
+                        None
+                    </option>
 
-            {/* <button type="button" onClick={handleExit}>
-                Exit Game - Home
-            </button> */}
+                    {playersArray.map((player) => {
+                        return (
+                            <option type="text" value={player.index} key={player.index}>
+                                {' '}
+                                {player.name}
+                            </option>
+                        )
+                    })}
+                </select>
+                <button type="submit">Remove Player</button>
+            </form>
         </div>
     )
 }
 
 export default Game
-
-// const handleRemovePlayer = (e) => {
-//     const { name } = e.target
-//     const playerIndex = playersArray.findIndex((x) => x.index === Number(name))
-//     if (playerIndex === -1) {
-//         // to do: handle error gracefully
-//     } else {
-//         setPlayersArray([
-//             ...playersArray.slice(0, playerIndex),
-//             ...playersArray.slice(playerIndex + 1),
-//         ])
-//     }
-// }
-
-/* <button type="button" onClick={handleRemovePlayer}> Remove Player </button> */
