@@ -22,6 +22,12 @@ function Game() {
     const [payoutDisplay, setPayoutDisplay] = useState(null)
     const navigate = useNavigate()
 
+    const indexNumStorage = window.sessionStorage.getItem('indexNumStorage')
+
+    if (indexNumStorage && Number(indexNumStorage) !== indexNum) {
+        setIndexNum(Number(indexNumStorage))
+    }
+
     const addPlayer = (e) => {
         e.preventDefault()
         if (newPlayer.length === 0) return // add display warning: cannot enter players without a name
@@ -35,10 +41,15 @@ function Game() {
             //  Display warning
             return
         }
+        const playersArrayStorage = [...playersArray, obj]
+        const setIndexNumStorage = indexNum + 1
         setPlayersArray([...playersArray, obj])
         setIndexNum(indexNum + 1)
         setNewPlayer('')
+        window.sessionStorage.setItem('playersArrayStorage', JSON.stringify(playersArrayStorage))
+        window.sessionStorage.setItem('indexNumStorage', setIndexNumStorage)
     }
+
     const handleSetNewPlayer = (e) => {
         setNewPlayer(e.target.value)
     }
@@ -85,12 +96,22 @@ function Game() {
         const playerIndex = playersArray.findIndex((x) => String(x.index) === removePlayer)
         if (playerIndex === -1) {
             // handle error
+            // console.log(playersArray[0].index, removePlayer)
+            // console.log('player is not found to reomve')
         } else {
-            setPlayersArray([
+            setPlayersArray(
+                [...playersArray.slice(0, playerIndex), ...playersArray.slice(playerIndex + 1)] ||
+                    []
+            )
+            setRemovePlayer('')
+            const playersArrayStorage = [
                 ...playersArray.slice(0, playerIndex),
                 ...playersArray.slice(playerIndex + 1),
-            ])
-            setRemovePlayer('')
+            ]
+            window.sessionStorage.setItem(
+                'playersArrayStorage',
+                JSON.stringify(playersArrayStorage)
+            )
         }
     }
 
@@ -161,7 +182,6 @@ function Game() {
                 })}
             <ExitGameDialog />
             <br />
-
             <form onSubmit={handleRemovePlayer}>
                 <select
                     value={removePlayer}
@@ -173,7 +193,6 @@ function Game() {
                     <option selected="selected" value="">
                         None
                     </option>
-
                     {playersArray.map((player) => {
                         return (
                             <option type="text" value={player.index} key={player.index}>
@@ -188,5 +207,4 @@ function Game() {
         </div>
     )
 }
-
 export default Game

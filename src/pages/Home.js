@@ -9,12 +9,11 @@ function Home() {
     const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault()
-
         window.sessionStorage.setItem('buyInCost', buyInCost)
         window.sessionStorage.setItem('chipsPerBuyIn', chipsPerBuyIn)
-
         navigate('/game')
     }
+
     const handleInputChange = (e) => {
         e.preventDefault()
         const { name, value } = e.target

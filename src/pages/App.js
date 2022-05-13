@@ -9,12 +9,17 @@ function App() {
 
     const buyInCostStorage = window.sessionStorage.getItem('buyInCost')
     const chipsPerBuyInStorage = window.sessionStorage.getItem('chipsPerBuyIn')
-
     if (!buyInCost || !chipsPerBuyIn) {
         if (buyInCostStorage && chipsPerBuyInStorage) {
             setBuyInCost(buyInCostStorage)
             setChipsPerBuyIn(chipsPerBuyInStorage)
         }
+    }
+
+    if (playersArray.length === 0) {
+        const playersArrayStorage = JSON.parse(sessionStorage.getItem('playersArrayStorage'))
+        if (playersArrayStorage && playersArrayStorage.length !== 0)
+            setPlayersArray(playersArrayStorage)
     }
 
     return (
