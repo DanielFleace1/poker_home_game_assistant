@@ -35,8 +35,8 @@ function Game() {
         if (newPlayer.length === 0) return // add display warning: cannot enter players without a name
         const obj = {
             name: newPlayer,
-            buyIns: 0,
-            endingChips: 0,
+            buyIns: '',
+            endingChips: '',
             index: indexNum,
         }
         if (playersArray.findIndex((x) => x.name === obj.name) > -1) {
@@ -58,8 +58,37 @@ function Game() {
     const handleSetNewPlayer = (e) => {
         setNewPlayer(e.target.value)
     }
+
+    const checkTotalChipsBuyIns = () => {
+        let totalChipsbuyIns = 0
+        playersArray.forEach((player) => {
+            totalChipsbuyIns += Number(player.buyIns) * Number(chipsPerBuyIn)
+        })
+        return totalChipsbuyIns
+    }
+
+    const checkTotalChipsChipCount = () => {
+        let totalChipsChipCount = 0
+        playersArray.forEach((player) => {
+            totalChipsChipCount += Number(player.endingChips)
+        })
+        return totalChipsChipCount
+    }
+
     const handleCalculatePayouts = (e) => {
         e.preventDefault()
+        if (playersArray.length <= 1) {
+            console.log('add multiple players to calculate payouts')
+            return
+        }
+
+        const check1 = checkTotalChipsBuyIns()
+        const check2 = checkTotalChipsChipCount()
+        if (check1 !== check2) {
+            console.log(' chip counts have been incorrectly entered')
+            return
+        }
+
         const payout = helperFunctions.calculatePayouts(
             playersArray,
             buyInCost,
@@ -70,54 +99,46 @@ function Game() {
             setPayoutDisplay(false)
         }, 5000)
     }
+
     const handleBuyInChange = (e) => {
         const { name, value } = e.target
         const playerIndex = playersArray.findIndex((x) => x.index === Number(name))
         if (playerIndex === -1) {
-            // to do: handle error gracefully
-        } else {
-            setPlayersArray([
-                ...playersArray.slice(0, playerIndex),
-                { ...playersArray[playerIndex], buyIns: value },
-                ...playersArray.slice(playerIndex + 1),
-            ])
+            return
         }
+        setPlayersArray([
+            ...playersArray.slice(0, playerIndex),
+            { ...playersArray[playerIndex], buyIns: value },
+            ...playersArray.slice(playerIndex + 1),
+        ])
     }
     const handleEndChipCountChange = (e) => {
         const { name, value } = e.target
         const playerIndex = playersArray.findIndex((x) => x.index === Number(name))
         if (playerIndex === -1) {
-            // to do: handle error gracefully
-        } else {
-            setPlayersArray([
-                ...playersArray.slice(0, playerIndex),
-                { ...playersArray[playerIndex], endingChips: value },
-                ...playersArray.slice(playerIndex + 1),
-            ])
+            return
         }
+        setPlayersArray([
+            ...playersArray.slice(0, playerIndex),
+            { ...playersArray[playerIndex], endingChips: value },
+            ...playersArray.slice(playerIndex + 1),
+        ])
     }
     const handleRemovePlayer = (e) => {
         e.preventDefault()
         const playerIndex = playersArray.findIndex((x) => String(x.index) === removePlayer)
         if (playerIndex === -1) {
-            // handle error
-            // console.log(playersArray[0].index, removePlayer)
-            // console.log('player is not found to reomve')
-        } else {
-            setPlayersArray(
-                [...playersArray.slice(0, playerIndex), ...playersArray.slice(playerIndex + 1)] ||
-                    []
-            )
-            setRemovePlayer('')
-            const playersArrayStorage = [
-                ...playersArray.slice(0, playerIndex),
-                ...playersArray.slice(playerIndex + 1),
-            ]
-            window.sessionStorage.setItem(
-                'playersArrayStorage',
-                JSON.stringify(playersArrayStorage)
-            )
+            return
         }
+        setPlayersArray(
+            [...playersArray.slice(0, playerIndex), ...playersArray.slice(playerIndex + 1)] || []
+        )
+        setRemovePlayer('')
+        const playersArrayStorage = [
+            ...playersArray.slice(0, playerIndex),
+            ...playersArray.slice(playerIndex + 1),
+        ]
+        window.sessionStorage.setItem('playersArrayStorage', JSON.stringify(playersArrayStorage))
     }
 
     // Effects
@@ -127,7 +148,6 @@ function Game() {
                 'Please enter amounts > 0 for: "Buy in Cost" & "Chips per Buy in": You will be directed to the home screen where you can do so!'
             )
             setAlertSeverity('error')
-
             setTimeout(() => {
                 navigate('/')
                 setAlertMsg('')
@@ -158,7 +178,7 @@ function Game() {
             {addPlayerNotification && <AddPlayerNotification />}
 
             <div style={{ display: 'flex' }}>
-                <div>player Name </div> <div> ::Buy ins</div>
+                <div>player Name </div> <div> ::Buy ins</div> <div> ::Ending Chips</div>
             </div>
 
             <form onSubmit={handleCalculatePayouts}>
@@ -171,11 +191,17 @@ function Game() {
                                     onChange={handleBuyInChange}
                                     name={player.index}
                                     value={player.buyIns}
+                                    required
+                                    type="number"
+                                    min="0"
                                 />{' '}
                                 <input
                                     onChange={handleEndChipCountChange}
                                     name={player.index}
                                     value={player.endingChips}
+                                    required
+                                    type="number"
+                                    min="0"
                                 />
                             </div>
                         )
