@@ -6,7 +6,6 @@ import App from './pages/App'
 import Home from './pages/Home'
 // import NotFound from './pages/NotFound'
 import Game from './pages/Game'
-import Payouts from './pages/Payouts'
 import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -17,7 +16,6 @@ root.render(
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
                     <Route path="/Game" element={<Game />} />
-                    <Route path="/Payouts" element={<Payouts />} />
                     <Route path="*" element={<Home />} />
                 </Route>
             </Routes>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
 import '../App.css'
-// import helperFunctions from '../helperFunctions'
+import helperFunctions from '../helperFunctions'
 import ExitGameDialog from '../components/ExitGameDialog'
 import Notification from '../components/Notification'
 
@@ -19,7 +19,7 @@ function Game() {
     const [alertMsg, setAlertMsg] = useState(false)
 
     const [indexNum, setIndexNum] = useState(0)
-    // const [payoutDisplay, setPayoutDisplay] = useState(false)
+    const [payoutDisplay, setPayoutDisplay] = useState(false)
     const navigate = useNavigate()
 
     const indexNumStorage = window.sessionStorage.getItem('indexNumStorage')
@@ -93,18 +93,18 @@ function Game() {
             setTimeout(() => {
                 setAlertMsg(false)
             }, 1000)
-            // return
+            return
         }
 
-        // const payout = helperFunctions.calculatePayouts(
-        //     playersArray,
-        //     buyInCost,
-        //     buyInCost / chipsPerBuyIn
-        // )
-        // setPayoutDisplay(payout)
-        // setTimeout(() => {
-        //     setPayoutDisplay(false)
-        // }, 5000)
+        const payout = helperFunctions.calculatePayouts(
+            playersArray,
+            buyInCost,
+            buyInCost / chipsPerBuyIn
+        )
+        setPayoutDisplay(payout)
+        setTimeout(() => {
+            setPayoutDisplay(false)
+        }, 5000)
     }
 
     const handleBuyInChange = (e) => {
@@ -213,11 +213,13 @@ function Game() {
                 <br />
                 <button type="submit">calculate payouts</button>
             </form>
-            {/* {payoutDisplay &&
+
+            {payoutDisplay &&
                 payoutDisplay.map((elm, index) => {
                     // eslint-disable-next-line react/no-array-index-key
                     return <div key={index}> {elm} </div>
-                })} */}
+                })}
+
             <ExitGameDialog />
             <br />
             <form onSubmit={handleRemovePlayer}>
