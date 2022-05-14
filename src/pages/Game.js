@@ -4,22 +4,24 @@ import '../App.css'
 import helperFunctions from '../helperFunctions'
 import ExitGameDialog from '../components/ExitGameDialog'
 import Notification from '../components/Notification'
+import PayoutDialog from '../components/PayoutsDialog'
 
 function Game() {
     const [
-        buyInCost, // setBuyInCost,
-        ,
-        chipsPerBuyIn, // setChipsPerBuyIn,
-        ,
+        buyInCost,
+        setBuyInCost,
+        chipsPerBuyIn,
+        setChipsPerBuyIn,
         playersArray,
         setPlayersArray,
     ] = useOutletContext()
     const [newPlayer, setNewPlayer] = useState('')
     const [removePlayer, setRemovePlayer] = useState('')
     const [alertMsg, setAlertMsg] = useState(false)
-
     const [indexNum, setIndexNum] = useState(0)
-    const [payoutDisplay, setPayoutDisplay] = useState(false)
+    // const [payoutDisplay, setPayoutDisplay] = useState(false)
+    const [openPayout, setOpenPayout] = useState(false)
+    const [payouts, setPayouts] = useState([])
     const navigate = useNavigate()
 
     const indexNumStorage = window.sessionStorage.getItem('indexNumStorage')
@@ -82,7 +84,6 @@ function Game() {
             }, 1000)
             return
         }
-
         const check1 = checkTotalChipsBuyIns()
         const check2 = checkTotalChipsChipCount()
         if (check1 !== check2) {
@@ -95,16 +96,13 @@ function Game() {
             }, 1000)
             return
         }
-
         const payout = helperFunctions.calculatePayouts(
             playersArray,
             buyInCost,
             buyInCost / chipsPerBuyIn
         )
-        setPayoutDisplay(payout)
-        setTimeout(() => {
-            setPayoutDisplay(false)
-        }, 5000)
+        setPayouts(payout)
+        setOpenPayout(true)
     }
 
     const handleBuyInChange = (e) => {
@@ -213,13 +211,6 @@ function Game() {
                 <br />
                 <button type="submit">calculate payouts</button>
             </form>
-
-            {payoutDisplay &&
-                payoutDisplay.map((elm, index) => {
-                    // eslint-disable-next-line react/no-array-index-key
-                    return <div key={index}> {elm} </div>
-                })}
-
             <ExitGameDialog />
             <br />
             <form onSubmit={handleRemovePlayer}>
@@ -242,6 +233,14 @@ function Game() {
                 </select>
                 <button type="submit">Remove Player</button>
             </form>
+            <PayoutDialog
+                openPayout={openPayout}
+                payouts={payouts}
+                setOpenPayout={setOpenPayout}
+                setPlayersArray={setPlayersArray}
+                setChipsPerBuyIn={setChipsPerBuyIn}
+                setBuyInCost={setBuyInCost}
+            />
         </div>
     )
 }
