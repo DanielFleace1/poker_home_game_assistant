@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
-import Alert from '@mui/material/Alert'
 import '../App.css'
 import helperFunctions from '../helperFunctions'
 import ExitGameDialog from '../components/ExitGameDialog'
-import AddPlayerNotification from '../components/AddPlayerNotif'
+import Notification from '../components/Notification'
 
 function Game() {
     const [
@@ -17,11 +16,10 @@ function Game() {
     ] = useOutletContext()
     const [newPlayer, setNewPlayer] = useState('')
     const [removePlayer, setRemovePlayer] = useState('')
-    const [alertMsg, setAlertMsg] = useState(null)
-    const [alertSeverity, setAlertSeverity] = useState(null)
+    const [alertMsg, setAlertMsg] = useState(false)
+
     const [indexNum, setIndexNum] = useState(0)
     const [payoutDisplay, setPayoutDisplay] = useState(false)
-    const [addPlayerNotification, setAddPlayerNotification] = useState(false)
     const navigate = useNavigate()
 
     const indexNumStorage = window.sessionStorage.getItem('indexNumStorage')
@@ -40,9 +38,9 @@ function Game() {
             index: indexNum,
         }
         if (playersArray.findIndex((x) => x.name === obj.name) > -1) {
-            setAddPlayerNotification(true)
+            setAlertMsg('Enter a unique name for each player. ')
             setTimeout(() => {
-                setAddPlayerNotification(false)
+                setAlertMsg(false)
             }, 3000)
             return
         }
@@ -147,11 +145,9 @@ function Game() {
             setAlertMsg(
                 'Please enter amounts > 0 for: "Buy in Cost" & "Chips per Buy in": You will be directed to the home screen where you can do so!'
             )
-            setAlertSeverity('error')
             setTimeout(() => {
                 navigate('/')
-                setAlertMsg('')
-                setAlertSeverity('')
+                setAlertMsg(false)
             }, 1000)
         }
     }, [buyInCost, chipsPerBuyIn, navigate])
@@ -159,7 +155,7 @@ function Game() {
     return (
         <div id="appWrapper">
             <h1> Poker Assistant Home Page</h1>
-            {alertMsg && <Alert severity={alertSeverity}>{alertMsg}</Alert>}
+            {alertMsg && <Notification alertMsg={alertMsg} />}
             <div> Buy in Cost: {buyInCost || '0'}</div>
             <div> Chips per Buy In: {chipsPerBuyIn || '0'}</div>
             <div> $/Chip {buyInCost / chipsPerBuyIn || '0'}</div>
@@ -175,7 +171,6 @@ function Game() {
             </form>
             <br />
             <br />
-            {addPlayerNotification && <AddPlayerNotification />}
 
             <div style={{ display: 'flex' }}>
                 <div>player Name </div> <div> ::Buy ins</div> <div> ::Ending Chips</div>

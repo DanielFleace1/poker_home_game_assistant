@@ -2,12 +2,13 @@ import React from 'react'
 import Alert from '@mui/material/Alert'
 import Stack from '@mui/material/Stack'
 
-function AddPlayerNotification() {
+// eslint-disable-next-line react/prop-types
+function Notification({ alertMsg }) {
     return (
         <Stack sx={{ width: '50%', textAlign: 'center' }} spacing={2}>
-            <Alert severity="error"> Use a unique name for each player</Alert>
+            <Alert severity="error">{alertMsg} </Alert>
         </Stack>
     )
 }
 
-export default AddPlayerNotification
+export default Notification
