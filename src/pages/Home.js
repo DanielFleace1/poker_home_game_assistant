@@ -40,6 +40,8 @@ function Home() {
                     value={buyInCost || ''}
                     name="buyInCost"
                     onChange={handleInputChange}
+                    required
+                    min="1"
                 />
                 : Buy in Cost $ <br />
                 <input
@@ -47,6 +49,8 @@ function Home() {
                     value={chipsPerBuyIn || ''}
                     name="chipsPerBuyIn"
                     onChange={handleInputChange}
+                    required
+                    min="1"
                 />{' '}
                 : Chips per buyIn
                 <br />

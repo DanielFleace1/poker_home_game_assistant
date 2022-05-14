@@ -4,6 +4,7 @@ import Alert from '@mui/material/Alert'
 import '../App.css'
 import helperFunctions from '../helperFunctions'
 import ExitGameDialog from '../components/ExitGameDialog'
+import AddPlayerNotification from '../components/AddPlayerNotif'
 
 function Game() {
     const [
@@ -19,7 +20,8 @@ function Game() {
     const [alertMsg, setAlertMsg] = useState(null)
     const [alertSeverity, setAlertSeverity] = useState(null)
     const [indexNum, setIndexNum] = useState(0)
-    const [payoutDisplay, setPayoutDisplay] = useState(null)
+    const [payoutDisplay, setPayoutDisplay] = useState(false)
+    const [addPlayerNotification, setAddPlayerNotification] = useState(false)
     const navigate = useNavigate()
 
     const indexNumStorage = window.sessionStorage.getItem('indexNumStorage')
@@ -38,7 +40,10 @@ function Game() {
             index: indexNum,
         }
         if (playersArray.findIndex((x) => x.name === obj.name) > -1) {
-            //  Display warning
+            setAddPlayerNotification(true)
+            setTimeout(() => {
+                setAddPlayerNotification(false)
+            }, 3000)
             return
         }
         const playersArrayStorage = [...playersArray, obj]
@@ -62,7 +67,7 @@ function Game() {
         )
         setPayoutDisplay(payout)
         setTimeout(() => {
-            setPayoutDisplay(null)
+            setPayoutDisplay(false)
         }, 5000)
     }
     const handleBuyInChange = (e) => {
@@ -150,9 +155,12 @@ function Game() {
             </form>
             <br />
             <br />
+            {addPlayerNotification && <AddPlayerNotification />}
+
             <div style={{ display: 'flex' }}>
                 <div>player Name </div> <div> ::Buy ins</div>
             </div>
+
             <form onSubmit={handleCalculatePayouts}>
                 {playersArray &&
                     playersArray.map((player) => {
@@ -184,15 +192,13 @@ function Game() {
             <br />
             <form onSubmit={handleRemovePlayer}>
                 <select
-                    value={removePlayer}
+                    value={removePlayer || 'DEFAULT'}
                     onChange={(e) => {
                         setRemovePlayer(e.target.value)
                     }}
                     name="players"
                 >
-                    <option selected="selected" value="">
-                        None
-                    </option>
+                    <option value="DEFAULT">Reomve Players</option>
                     {playersArray.map((player) => {
                         return (
                             <option type="text" value={player.index} key={player.index}>
