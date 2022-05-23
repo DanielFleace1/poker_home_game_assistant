@@ -54,16 +54,6 @@
     border-bottom: solid;
 }
 
-/* .hpGameInfo{
-    display: flex;
-    flex-direction: row ;
-    color: white;
-    border:none;
-    border-bottom: solid;
-    width: 100%;        
-    justify-content: center;
-    border: solid;
-} */
 
 .hpForm{
     margin-top: 20px;
@@ -84,6 +74,27 @@
     font-size: 20px;
 }
 
+.hpGameInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* color:#fae207; */
+    color: white;
+    font-size: 24px;
+}
+
+
+/* .hpGameInfoText{
+
+} */
+
+.hpGameInfoNumber{
+    margin-left: 10px;
+}
+
 .hpFormInputs{
     border-left: none;
     border-right: none;
@@ -93,13 +104,11 @@
     color: white;
     text-align: center;
     font-weight: 100;
-    font-size: 14px;
+    font-size: 18px;
     margin-left: 5px;
 }
 
-.hpFormInputs:focus {
-    /* outline: none; */
-  }
+
 
 
 #hpStartButton{
@@ -160,6 +169,13 @@
     #hpInfoButton{
         width: 120px;
         margin-top: -5px;
+    }
+    .hpGameInfo{
+        font-size: 16px ;
+    }
+    .hpFormInputs{
+        width: 150px;
+        font-size: 16px;
     }
 }
 

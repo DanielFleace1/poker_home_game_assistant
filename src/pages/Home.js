@@ -35,17 +35,6 @@ function Home() {
             <div id="homeWrapper">
                 <div className="hpPokerTitle">Poker Assistant Home Page</div>
                 <div className="hpPokerSubHeading"> Set up your game!</div>
-                {/* <div className="hpPokerSubHeading"> Star    t a Game!</div> */}
-                {/* <div className="hpGameInfo">
-                <div style={{ paddingRight: '5%' }}>Buy in Cost:{buyInCost || '0'} $ </div>
-                <div style={{ paddingLeft: '5%' }}>Chips per buy in: {chipsPerBuyIn || '0'}</div>
-                <br />
-            </div> */}
-                {/* <div className="hpGameInfo" style={{ paddingLeft: '5%' }}> */}
-                {/* Dollar/Chip: {buyInCost / chipsPerBuyIn || '0'} */}
-                {/* {parseFloat(chipsPerBuyIn / buyInCost).toFixed(2) || '0'}{' '} */}
-                {/* </div> */}
-                {/* <br /> */}
                 <form className="hpForm" onSubmit={handleSubmit}>
                     <div>
                         <div className="formText">Buy in Cost $:</div>
@@ -71,7 +60,12 @@ function Home() {
                             className="hpFormInputs"
                         />
                     </div>
-
+                    <div className="hpGameInfo">
+                        <div className="hpGameInfoText"> $/chips:</div>
+                        <div className="hpGameInfoNumber">
+                            {chipsPerBuyIn > 0 && buyInCost > 0 && buyInCost / chipsPerBuyIn}
+                        </div>
+                    </div>
                     <button id="hpStartButton" type="submit">
                         Start Game !
                     </button>
