@@ -6,7 +6,7 @@ import App from './pages/App'
 import Home from './pages/Home'
 // import NotFound from './pages/NotFound'
 import Game from './pages/Game'
-import './index.css'
+import './styling/index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
-import '../App.css'
+import '../styling/App.css'
 import helperFunctions from '../helperFunctions'
 import ExitGameDialog from '../components/ExitGameDialog'
 import Notification from '../components/Notification'

@@ -1,0 +1,208 @@
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Coda&family=Noto+Sans&display=swap'); */
+
+
+#bg{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+
+#homeWrapper{
+    background-image: url('../../imgs/pokerBackground.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center center;
+    min-height: 100vh;  
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    overflow-y: hidden; 
+    overflow-x: hidden;
+    /*  */
+    /* border: solid; */
+}
+
+.hpPokerTitle{
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 300;
+    color: white;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+}
+
+.hpPokerSubHeading{
+    font-weight: 100;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+    width:80%;
+    border-bottom: solid;
+}
+
+/* .hpGameInfo{
+    display: flex;
+    flex-direction: row ;
+    color: white;
+    border:none;
+    border-bottom: solid;
+    width: 100%;        
+    justify-content: center;
+    border: solid;
+} */
+
+.hpForm{
+    margin-top: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
+
+.formText{
+    box-sizing: border-box;
+    display: inline-block;
+    width: 170px;   
+    color: white;
+    font-size: 18px;
+    font-family: 'Coda', 'cursive';
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.hpFormInputs{
+    border-left: none;
+    border-right: none;
+    border-top:none ;
+    border-bottom: solid;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    font-weight: 100;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.hpFormInputs:focus {
+    /* outline: none; */
+  }
+
+
+#hpStartButton{
+    background-color: #0A6D3C;
+    border: solid;
+    border-color: white;
+    height: 42px;
+    width: 182px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 100;
+    font-size: 14px;
+}
+
+#hpInfoButton{
+    background-color: #fae207;
+    border: solid;
+    border-color: white;
+    color:#0A6D3C;
+    height: 32px;
+    width: 142px;
+    border-radius: 10px;
+    font-weight: 100;
+    font-size: 14px;
+}
+
+/* Media Queries */
+@media screen and (max-width: 501px) {
+    #homeWrapper{
+        background-size: cover;
+        min-height: 100vh;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 450px) {
+    .hpPokerTitle{
+        font-size: 24px; 
+        /* 32 @ desktop size */
+    }
+    .hpPokerSubHeading{
+        font-size: 20px;
+        /* min-width: 300px; */
+        padding-top: 5px;
+    }
+    .hpForm{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .formText{
+        font-size: 16px;
+        width: 130px;   
+    }
+    #hpStartButton{ 
+        height: 42px;
+        width: 160px;
+    }
+    #hpInfoButton{
+        width: 120px;
+        margin-top: -5px;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .hpPokerTitle{
+        font-size: 20px;
+    }
+    .hpPokerSubHeading{
+        font-size: 18px;
+    }
+    .hpFormInputs{
+        width: 100px;
+    }
+    #hpStartButton{ 
+        height: 42px;
+        width: 130px;
+    }
+    #hpInfoButton{
+        width: 90px;
+        margin-top: -5px;
+    }
+}
+
+
+/* Extras*/
+/* #homeWrapper{    
+    background-image: url('../../imgs/pokerBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    background-color: beige;
+    overflow-y: hidden;
+    font-family:    'Coda', 'cursive';
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;  
+    width: 474px;
+    max-width: 474px;
+    min-width: 474px;
+} */
+
+
