@@ -173,82 +173,82 @@ function Game() {
                     <div className="g_cGiC_text"> $/Chip </div>
                     <div className="g_cGiC_nubmer"> {buyInCost / chipsPerBuyIn || '0'}</div>
                 </div>
-
-                <form className="gameForm" onSubmit={addPlayer}>
-                    <div id="g_addPlayerContainer">
-                        <div id="g_PlayerName">Add Player Name: </div>
-                        <input
-                            value={newPlayer}
-                            onChange={handleSetNewPlayer}
-                            // placeholder="Click to Enter"
-                            className="g_PlayerNameInput"
-                        />
+                <div id="g_formContainer">
+                    <form className="gameForm" onSubmit={addPlayer}>
+                        <div id="g_addPlayerContainer">
+                            <div id="g_PlayerName">Add Player Name: </div>
+                            <input
+                                value={newPlayer}
+                                onChange={handleSetNewPlayer}
+                                // placeholder="Click to Enter"
+                                className="g_PlayerNameInput"
+                            />
+                        </div>
+                        <button id="addPlayerButton" type="submit">
+                            Add Player
+                        </button>
+                    </form>
+                    <div id="g_listedPlayersFormHeadingsContainer">
+                        <div className="g_lPFH_text">Name </div>
+                        <div id="g_lPFH_buyIns" className="g_lPFH_text">
+                            {' '}
+                            Buy Ins
+                        </div>
+                        <div className="g_lPFH_text"> Ending Chips</div>
                     </div>
-                    <button id="addPlayerButton" type="submit">
-                        Add Player
-                    </button>
-                </form>
-                <div id="g_listedPlayersFormHeadingsContainer">
-                    <div className="g_lPFH_text">Name </div>
-                    <div id="g_lPFH_buyIns" className="g_lPFH_text">
-                        {' '}
-                        Buy Ins
-                    </div>
-                    <div className="g_lPFH_text"> Ending Chips</div>
+                    <form id="g_listedPlayersFormContainer" onSubmit={handleCalculatePayouts}>
+                        {playersArray &&
+                            playersArray.map((player) => {
+                                return (
+                                    <div className="g_lpFGC_Container" key={player.index}>
+                                        <div className="g_lpFGC_name"> {player.name}</div>
+                                        <input
+                                            className="g_lpFGC_InputBuyIn"
+                                            onChange={handleBuyInChange}
+                                            name={player.index}
+                                            value={player.buyIns}
+                                            required
+                                            type="number"
+                                            min="0"
+                                        />{' '}
+                                        <input
+                                            className="g_lpFGC_InputEndingChips"
+                                            onChange={handleEndChipCountChange}
+                                            name={player.index}
+                                            value={player.endingChips}
+                                            required
+                                            type="number"
+                                            min="0"
+                                        />
+                                    </div>
+                                )
+                            })}
+                        <button id="g_calculatePayouts" type="submit">
+                            Calculate payouts
+                        </button>
+                    </form>
+                    <form onSubmit={handleRemovePlayer}>
+                        <select
+                            value={removePlayer || 'DEFAULT'}
+                            onChange={(e) => {
+                                setRemovePlayer(e.target.value)
+                            }}
+                            name="players"
+                        >
+                            <option value="DEFAULT">Reomve Players</option>
+                            {playersArray.map((player) => {
+                                return (
+                                    <option type="text" value={player.index} key={player.index}>
+                                        {' '}
+                                        {player.name}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                        <button type="submit">Remove Player</button>
+                    </form>
                 </div>
-                <form id="g_listedPlayersFormContainer" onSubmit={handleCalculatePayouts}>
-                    {playersArray &&
-                        playersArray.map((player) => {
-                            return (
-                                <div className="g_lpFGC_Container" key={player.index}>
-                                    <div className="g_lpFGC_name"> {player.name}</div>
-                                    <input
-                                        className="g_lpFGC_InputBuyIn"
-                                        onChange={handleBuyInChange}
-                                        name={player.index}
-                                        value={player.buyIns}
-                                        required
-                                        type="number"
-                                        min="0"
-                                    />{' '}
-                                    <input
-                                        className="g_lpFGC_InputEndingChips"
-                                        onChange={handleEndChipCountChange}
-                                        name={player.index}
-                                        value={player.endingChips}
-                                        required
-                                        type="number"
-                                        min="0"
-                                    />
-                                </div>
-                            )
-                        })}
-                    <button id="g_calculatePayouts" type="submit">
-                        Calculate payouts
-                    </button>
-                </form>
                 <ExitGameDialog />
-                <br />
-                <form onSubmit={handleRemovePlayer}>
-                    <select
-                        value={removePlayer || 'DEFAULT'}
-                        onChange={(e) => {
-                            setRemovePlayer(e.target.value)
-                        }}
-                        name="players"
-                    >
-                        <option value="DEFAULT">Reomve Players</option>
-                        {playersArray.map((player) => {
-                            return (
-                                <option type="text" value={player.index} key={player.index}>
-                                    {' '}
-                                    {player.name}
-                                </option>
-                            )
-                        })}
-                    </select>
-                    <button type="submit">Remove Player</button>
-                </form>
                 <PayoutDialog
                     openPayout={openPayout}
                     payouts={payouts}

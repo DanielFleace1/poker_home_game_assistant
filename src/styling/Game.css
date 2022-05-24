@@ -32,12 +32,10 @@
 .g_cGiC_text{
     padding-left: 15px;
     font-size: 16px;
-    /* color: #fae207; */
 }
 .g_cGiC_nubmer{
     padding-left: 5px;
     font-size: 16px;
-    /* color: #fae207; */
 }
 .gameForm{
     margin-top: 20px;
@@ -99,8 +97,6 @@
 .g_lPFH_text{
     width: 150px;
     color: #fae207;
-    /* border-left: solid; */
-    /* border-right: solid; */
     text-align: center;
 }
 #g_lPFH_buyIns{
@@ -109,18 +105,23 @@
 
 #g_listedPlayersFormContainer{
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
+    overflow-y: scroll;
     align-items: center;
-    /* height: 320px; */
-    /* overflow-y: scroll; */
+    height: 425px;
+    overflow-y: scroll;
+}
+
+
+#g_formContainer{
     /* border: solid; */
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* align-items: center; */
-    /* justify-content: center; */
+    color: white;
+    height: 700px;
+    /* min-height: 630px; */
+    /* max-height: 630px; */
+    overflow-y: scroll;
+
 }
 
 .g_lpFGC_Container{
@@ -154,7 +155,6 @@
     text-align: center;
     margin-bottom: 7px;
     margin-left: 10px;
-
     /* margin-right:  */
 }
 
@@ -171,7 +171,6 @@
 }
 
 #g_calculatePayouts{
-
     background-color: white;
     border: solid;
     border-color: #fae207;
@@ -182,5 +181,25 @@
     font-weight: 100;
     font-size: 14px;
     margin-top: 20px;
-    
+}
+
+#g_exitGameButtonContainer{
+    width: 100%;
+    text-align: right;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+}
+
+#g_exitGameButton{
+    border: solid;
+    background-color: white;
+    color:#0A6D3C;
+    box-sizing: border-box;
+    border: solid;
+    height: 20px;
+    width: 100px;
+    border-radius: 10px;
+    font-weight: 100;
+    font-size: 14px;
 }

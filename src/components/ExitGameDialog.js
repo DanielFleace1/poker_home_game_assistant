@@ -35,8 +35,8 @@ function ExitGameDialog() {
     }
 
     return (
-        <div>
-            <button type="button" onClick={handleOpen}>
+        <div id="g_exitGameButtonContainer">
+            <button id="g_exitGameButton" type="button" onClick={handleOpen}>
                 Exit Game
             </button>
             <Dialog
