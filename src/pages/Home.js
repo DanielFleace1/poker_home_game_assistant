@@ -63,7 +63,8 @@ function Home() {
                     <div className="hpGameInfo">
                         <div className="hpGameInfoText"> $/chips:</div>
                         <div className="hpGameInfoNumber">
-                            {chipsPerBuyIn > 0 && buyInCost > 0 && buyInCost / chipsPerBuyIn}
+                            {(chipsPerBuyIn > 0 && buyInCost > 0 && buyInCost / chipsPerBuyIn) ||
+                                ' 0 '}
                         </div>
                     </div>
                     <button id="hpStartButton" type="submit">

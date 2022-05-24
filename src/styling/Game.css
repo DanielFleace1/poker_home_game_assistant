@@ -1,0 +1,186 @@
+.gameTitle{
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 300;
+    color: white;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+}
+.gameSubHeading{
+    font-weight: 100;
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin-top: 1px;
+}
+.g_CurrentGameInfoContainer{
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid;
+    width: 80%;
+    justify-content: center;
+    margin-top: 15px;
+    padding-right: 20px;
+    color: white;
+    font-weight: 100;
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+.g_cGiC_text{
+    padding-left: 15px;
+    font-size: 16px;
+    /* color: #fae207; */
+}
+.g_cGiC_nubmer{
+    padding-left: 5px;
+    font-size: 16px;
+    /* color: #fae207; */
+}
+.gameForm{
+    margin-top: 20px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
+#g_addPlayerContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* border: solid; */
+    width: 100%;
+
+}
+#g_PlayerName{
+    color: white;
+}   
+.g_PlayerNameInput{
+    border-left: none;
+    border-right: none;
+    border-top:none ;
+    border-bottom: solid;
+    background-color: transparent;
+    color: white;
+    text-align: center;
+    font-weight: 100;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+#addPlayerButton{
+    background-color: #0A6D3C;
+    border: solid;
+    border-color: white;
+    height: 36px;
+    width: 182px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 100;
+    font-size: 14px;
+}
+#addPlayerButton:hover{
+    background-color:  #079950;
+}
+#g_listedPlayersFormHeadingsContainer{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    width: 100%;
+    margin-top: 30px;
+    /* border: solid; */
+}
+.g_lPFH_text{
+    width: 150px;
+    color: #fae207;
+    /* border-left: solid; */
+    /* border-right: solid; */
+    text-align: center;
+}
+#g_lPFH_buyIns{
+    width: 120px;
+}
+
+#g_listedPlayersFormContainer{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    /* height: 320px; */
+    /* overflow-y: scroll; */
+    /* border: solid; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.g_lpFGC_Container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* align-items: center; */
+    color: white;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 10px;
+
+    /* border: solid; */
+}
+
+.g_lpFGC_name{
+    width: 150px;
+    /* text-align: ; */
+    /* border: solid; */
+    position: relative;
+    bottom: 0;
+}
+
+.g_lpFGC_InputBuyIn{
+    width: 50px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    /* border: solid; */
+    border-bottom: solid;
+    text-align: center;
+    margin-bottom: 7px;
+    margin-left: 10px;
+
+    /* margin-right:  */
+}
+
+.g_lpFGC_InputEndingChips{
+    width: 120px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom: solid;
+    text-align: center;
+    margin-left:35px;
+    margin-bottom: 7px;
+    /* width: 100px; */
+}
+
+#g_calculatePayouts{
+
+    background-color: white;
+    border: solid;
+    border-color: #fae207;
+    color:#0A6D3C;
+    height: 32px;
+    width: 142px;
+    border-radius: 10px;
+    font-weight: 100;
+    font-size: 14px;
+    margin-top: 20px;
+    
+}

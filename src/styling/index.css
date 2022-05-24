@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Coda&family=Noto+Sans&display=swap');
-
 body{
     background-color: beige;
     font-family:    'Coda', 'cursive';
@@ -9,9 +8,6 @@ body{
     /*  */
     /* overflow-y: hidden;  */
 }
-
-
-
 /*  To be deleted */
 /* body {
     margin: 0;

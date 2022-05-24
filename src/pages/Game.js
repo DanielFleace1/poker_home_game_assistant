@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useNavigate } from 'react-router-dom'
-import '../styling/App.css'
+import '../styling/Game.css'
 import helperFunctions from '../helperFunctions'
 import ExitGameDialog from '../components/ExitGameDialog'
 import Notification from '../components/Notification'
@@ -160,87 +160,104 @@ function Game() {
     }, [buyInCost, chipsPerBuyIn, navigate])
 
     return (
-        <div id="appWrapper">
-            <h1> Poker Assistant Home Page</h1>
-            {alertMsg && <Notification alertMsg={alertMsg} />}
-            <div> Buy in Cost: {buyInCost || '0'}</div>
-            <div> Chips per Buy In: {chipsPerBuyIn || '0'}</div>
-            <div> $/Chip {buyInCost / chipsPerBuyIn || '0'}</div>
-            <br />
-            <form onSubmit={addPlayer}>
-                add Player
-                <input
-                    value={newPlayer}
-                    onChange={handleSetNewPlayer}
-                    placeholder="Enter player name"
-                />
-                <button type="submit">addPlayer</button>
-            </form>
-            <br />
-            <br />
+        <div id="bg">
+            <div id="homeWrapper">
+                <div className="gameTitle"> Poker Assistant Game Page</div>
+                <div className="gameSubHeading"> Current Game Info!</div>
+                {alertMsg && <Notification alertMsg={alertMsg} />}
+                <div className="g_CurrentGameInfoContainer">
+                    <div className="g_cGiC_text"> Buy in Cost: </div>
+                    <div className="g_cGiC_nubmer">{buyInCost || '0'}</div>
+                    <div className="g_cGiC_text"> Chips per Buy In: </div>
+                    <div className="g_cGiC_nubmer">{chipsPerBuyIn || '0'}</div>
+                    <div className="g_cGiC_text"> $/Chip </div>
+                    <div className="g_cGiC_nubmer"> {buyInCost / chipsPerBuyIn || '0'}</div>
+                </div>
 
-            <div style={{ display: 'flex' }}>
-                <div>player Name </div> <div> ::Buy ins</div> <div> ::Ending Chips</div>
-            </div>
-
-            <form onSubmit={handleCalculatePayouts}>
-                {playersArray &&
-                    playersArray.map((player) => {
-                        return (
-                            <div key={player.index}>
-                                {player.name}{' '}
-                                <input
-                                    onChange={handleBuyInChange}
-                                    name={player.index}
-                                    value={player.buyIns}
-                                    required
-                                    type="number"
-                                    min="0"
-                                />{' '}
-                                <input
-                                    onChange={handleEndChipCountChange}
-                                    name={player.index}
-                                    value={player.endingChips}
-                                    required
-                                    type="number"
-                                    min="0"
-                                />
-                            </div>
-                        )
-                    })}
+                <form className="gameForm" onSubmit={addPlayer}>
+                    <div id="g_addPlayerContainer">
+                        <div id="g_PlayerName">Add Player Name: </div>
+                        <input
+                            value={newPlayer}
+                            onChange={handleSetNewPlayer}
+                            // placeholder="Click to Enter"
+                            className="g_PlayerNameInput"
+                        />
+                    </div>
+                    <button id="addPlayerButton" type="submit">
+                        Add Player
+                    </button>
+                </form>
+                <div id="g_listedPlayersFormHeadingsContainer">
+                    <div className="g_lPFH_text">Name </div>
+                    <div id="g_lPFH_buyIns" className="g_lPFH_text">
+                        {' '}
+                        Buy Ins
+                    </div>
+                    <div className="g_lPFH_text"> Ending Chips</div>
+                </div>
+                <form id="g_listedPlayersFormContainer" onSubmit={handleCalculatePayouts}>
+                    {playersArray &&
+                        playersArray.map((player) => {
+                            return (
+                                <div className="g_lpFGC_Container" key={player.index}>
+                                    <div className="g_lpFGC_name"> {player.name}</div>
+                                    <input
+                                        className="g_lpFGC_InputBuyIn"
+                                        onChange={handleBuyInChange}
+                                        name={player.index}
+                                        value={player.buyIns}
+                                        required
+                                        type="number"
+                                        min="0"
+                                    />{' '}
+                                    <input
+                                        className="g_lpFGC_InputEndingChips"
+                                        onChange={handleEndChipCountChange}
+                                        name={player.index}
+                                        value={player.endingChips}
+                                        required
+                                        type="number"
+                                        min="0"
+                                    />
+                                </div>
+                            )
+                        })}
+                    <button id="g_calculatePayouts" type="submit">
+                        Calculate payouts
+                    </button>
+                </form>
+                <ExitGameDialog />
                 <br />
-                <button type="submit">calculate payouts</button>
-            </form>
-            <ExitGameDialog />
-            <br />
-            <form onSubmit={handleRemovePlayer}>
-                <select
-                    value={removePlayer || 'DEFAULT'}
-                    onChange={(e) => {
-                        setRemovePlayer(e.target.value)
-                    }}
-                    name="players"
-                >
-                    <option value="DEFAULT">Reomve Players</option>
-                    {playersArray.map((player) => {
-                        return (
-                            <option type="text" value={player.index} key={player.index}>
-                                {' '}
-                                {player.name}
-                            </option>
-                        )
-                    })}
-                </select>
-                <button type="submit">Remove Player</button>
-            </form>
-            <PayoutDialog
-                openPayout={openPayout}
-                payouts={payouts}
-                setOpenPayout={setOpenPayout}
-                setPlayersArray={setPlayersArray}
-                setChipsPerBuyIn={setChipsPerBuyIn}
-                setBuyInCost={setBuyInCost}
-            />
+                <form onSubmit={handleRemovePlayer}>
+                    <select
+                        value={removePlayer || 'DEFAULT'}
+                        onChange={(e) => {
+                            setRemovePlayer(e.target.value)
+                        }}
+                        name="players"
+                    >
+                        <option value="DEFAULT">Reomve Players</option>
+                        {playersArray.map((player) => {
+                            return (
+                                <option type="text" value={player.index} key={player.index}>
+                                    {' '}
+                                    {player.name}
+                                </option>
+                            )
+                        })}
+                    </select>
+                    <button type="submit">Remove Player</button>
+                </form>
+                <PayoutDialog
+                    openPayout={openPayout}
+                    payouts={payouts}
+                    setOpenPayout={setOpenPayout}
+                    setPlayersArray={setPlayersArray}
+                    setChipsPerBuyIn={setChipsPerBuyIn}
+                    setBuyInCost={setBuyInCost}
+                />
+            </div>
         </div>
     )
 }
